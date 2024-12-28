@@ -1,0 +1,6 @@
+pytesseract==0.3.13
+PyMuPDF==1.25.1
+pandas==2.2.3
+numpy==2.2.1
+openai==1.58.1
+SQLAlchemy==2.0.36
