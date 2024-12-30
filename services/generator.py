@@ -28,19 +28,20 @@ class ChatService:
 
     def get_response(self,prompt: str, retriever):
         try:
-            context= retriever.get_relevant_context(prompt)
+            context = retriever.get_relevant_context(prompt)
             base_prompt = f"""This is the context: {context} and answer the user query based on this only. 
             If there is no relevant answer present here, answer that you don't know. 
             Here is the user query: {prompt}."""
             self.update_messages("user", base_prompt)
-            response= openai.chat.completions.create(
-                model= self.model_name,
-                messages= self.messages,
-                temperature= self.temperature,
-                max_tokens= self.max_tokens
+            response = openai.chat.completions.create(
+                model=self.model_name,
+                messages=self.messages,
+                temperature=self.temperature,
+                max_tokens=self.max_tokens
             )
             self.update_messages("assistant", response.choices[0].message.content)
             return response.choices[0].message.content
         except openai.OpenAIError as e:
             print(f"An error occured: {e}")
+
 
