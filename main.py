@@ -1,7 +1,9 @@
 from services.extraction import extract_text_digital, extract_text_scanned
 from services.chunking import chunk_text
 from services.embedding import EmbeddingModel
+from services.generator import ChatService
 from utils import prepare_lookup_table
+from services.retriever import RetrieverService
 import sys
 from dotenv import load_dotenv
 
@@ -18,11 +20,20 @@ def main(pdf_path, scanned=False, language='eng'):
     
     embeddings_obtained =EmbeddingModel().get_embeddings(chunks)
     
-    prepare_lookup_table(chunks, embeddings_obtained)
+    lookup_table = prepare_lookup_table(chunks, embeddings_obtained)
     
+    retriever= RetrieverService(lookup_table)
     
-    
+    chat_service = ChatService()
 
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            break
+        response = chat_service.get_response(user_input)
+        print(f"ASSISTANT: {response}")
+        
+    
 
 if __name__ == '__main__':
     

@@ -26,9 +26,13 @@ class ChatService:
             "content": content
         })
 
-    def get_response(self,prompt: str):
+    def get_response(self,prompt: str, retriever):
         try:
-            self.update_messages("user", prompt)
+            context= retriever.get_relevant_context(prompt)
+            base_prompt = f"This is the context: {context} and answer the user query based on this only. 
+            If there is no relevant answer present here, answer that you don't know. 
+            Here is the user query: {prompt}."
+            self.update_messages("user", base_prompt)
             response= openai.chat.completions.create(
                 model= self.model_name,
                 messages= self.messages,
