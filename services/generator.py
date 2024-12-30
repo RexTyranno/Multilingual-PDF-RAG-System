@@ -15,12 +15,11 @@ class ChatService:
         self.model_name = model_name
         self.temperature = temperature
         self.max_tokens = max_tokens
-        openai.api_key = self.api_key
         self.messages = [{
             "role": "system",
             "content": system_prompt
         }]
-        
+
     def update_messages(self ,role, content):
         self.messages.append({
             "role": role,
@@ -38,7 +37,7 @@ class ChatService:
             )
             self.update_messages("assistant", response.choices[0].message.content)
             return response.choices[0].message.content
-        except openai.error.OpenAIError as e:
+        except openai.OpenAIError as e:
             print(f"An error occured: {e}")
 
 
