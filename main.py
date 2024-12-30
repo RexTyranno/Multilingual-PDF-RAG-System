@@ -16,7 +16,7 @@ def main(pdf_path, scanned=False, language='eng'):
     else:
         extracted_text = extract_text_digital(pdf_path)
     
-    chunks = chunk_text(extracted_text, chunk_size=500)
+    chunks = chunk_text(extracted_text, chunk_size=100)
     
     embeddings_obtained = EmbeddingModel().get_embeddings(chunks)
     
