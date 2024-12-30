@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 class RetrieverService:
     def __init__(self, stored_data):
-        self.stored_data= stored_data
+        self.stored_data = stored_data
     
     def get_relevant_context(self, query: str) -> str:
         """

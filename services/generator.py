@@ -4,7 +4,7 @@ import os
 
 
 class ChatService:
-    def _init_(self, 
+    def __init__(self,
                 model_name="gpt-3.5-turbo",
                 temperature=0.7, 
                 max_tokens=2048,
