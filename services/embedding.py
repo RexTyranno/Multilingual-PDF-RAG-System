@@ -2,8 +2,8 @@ import os
 import openai
 
 class EmbeddingModel:
-    def __init__(self, api_key=None, model_name='text-embedding-ada-002'):
-        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+    def __init__(self, api_key, model_name='text-embedding-3-small'):
+        self.api_key = os.getenv("OPENAI_API_KEY")
         openai.api_key = self.api_key
         self.model_name = model_name
 
@@ -21,3 +21,4 @@ class EmbeddingModel:
             model=self.model_name
         )
         return [item['embedding'] for item in response['data']]
+
