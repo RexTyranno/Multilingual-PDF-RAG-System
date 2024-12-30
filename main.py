@@ -10,7 +10,6 @@ load_dotenv()
 
 
 def main(pdf_path, scanned=False, language='eng'):
-
     if scanned:
         extracted_text = extract_text_scanned(pdf_path, language)
     else:
