@@ -19,8 +19,8 @@ class RetrieverService:
         query_embedding = np.array(query_embedding).reshape(1, -1)
         stored_embeddings = np.array(self.stored_data['embedding'].tolist())
         similarity = cosine_similarity(query_embedding, stored_embeddings)
-        index = np.argmax(similarity)
-        return self.stored_data['Text'].iloc[index]
+        top_5_similar_chunks = similarity.argsort()[0][::-1][:5]
+        return self.stored_data.iloc[top_5_similar_chunks[0]]['Text']
 
       
     
