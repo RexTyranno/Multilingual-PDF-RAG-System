@@ -4,10 +4,10 @@ from services.embedding import EmbeddingModel
 from services.generator import ChatService
 from utils import prepare_lookup_table
 from services.retriever import RetrieverService
-import sys
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 def main(pdf_path, scanned=False, language='eng'):
 
@@ -18,11 +18,11 @@ def main(pdf_path, scanned=False, language='eng'):
     
     chunks = chunk_text(extracted_text, chunk_size=500)
     
-    embeddings_obtained =EmbeddingModel().get_embeddings(chunks)
+    embeddings_obtained = EmbeddingModel().get_embeddings(chunks)
     
     lookup_table = prepare_lookup_table(chunks, embeddings_obtained)
     
-    retriever= RetrieverService(lookup_table)
+    retriever = RetrieverService(lookup_table)
     
     chat_service = ChatService()
 
@@ -31,18 +31,16 @@ def main(pdf_path, scanned=False, language='eng'):
         if user_input.lower() == "exit":
             break
         response = chat_service.get_response(user_input,retriever)
-        print(f"ASSISTANT: {response}")
-        
-    
+        print(f"ASSISTANT: {response}")
+
 
 if __name__ == '__main__':
-    
     # pdf_path = sys.argv[1] or None
     # scanned = False if len(sys.argv) < 3 else sys.argv[2].lower() == "true"
     # lang = 'eng' if len(sys.argv) < 4 else sys.argv[3]
     
-    pdf_path= "/home/bubbu/projects/RAG-PDF/Resume_Agrima.pdf"
-    scanned= False
-    lang= 'eng'
+    pdf_path = "Resume_Agrima.pdf"
+    scanned = False
+    lang = 'eng'
     
     main(pdf_path, scanned, lang)
