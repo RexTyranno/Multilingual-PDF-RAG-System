@@ -40,12 +40,3 @@ class ChatService:
         except openai.OpenAIError as e:
             print(f"An error occured: {e}")
 
-
-chat_service = ChatService(system_prompt="You are a school teacher whose name is Walter White who teaches chemistry.")
-
-while True:
-    user_input = input("You: ")
-    if user_input.lower() == "exit":
-        break
-    response = chat_service.get_response(user_input)
-    print(f"ASSISTANT: {response}")
