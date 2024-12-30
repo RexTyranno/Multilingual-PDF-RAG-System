@@ -30,15 +30,19 @@ def main(pdf_path, scanned=False, language='eng'):
         user_input = input("You: ")
         if user_input.lower() == "exit":
             break
-        response = chat_service.get_response(user_input)
+        response = chat_service.get_response(user_input,retriever)
         print(f"ASSISTANT: {response}")
         
     
 
 if __name__ == '__main__':
     
-    pdf_path = sys.argv[1]
-    scanned = False if len(sys.argv) < 3 else sys.argv[2].lower() == "true"
-    lang = 'eng' if len(sys.argv) < 4 else sys.argv[3]
+    # pdf_path = sys.argv[1] or None
+    # scanned = False if len(sys.argv) < 3 else sys.argv[2].lower() == "true"
+    # lang = 'eng' if len(sys.argv) < 4 else sys.argv[3]
+    
+    pdf_path= "/home/bubbu/projects/RAG-PDF/Resume_Agrima.pdf"
+    scanned= False
+    lang= 'eng'
     
     main(pdf_path, scanned, lang)

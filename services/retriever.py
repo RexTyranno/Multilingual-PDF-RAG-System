@@ -8,7 +8,7 @@ class RetrieverService:
     
     def get_relevant_context(self, query: str) -> str:
         
-        query_embedding = EmbeddingModel().get_embeddings(query)
+        query_embedding = EmbeddingModel().get_embedding(query)
         query_array= np.array(query_embedding)
         
         query_array_reshaped = query_array.reshape(1, -1)
